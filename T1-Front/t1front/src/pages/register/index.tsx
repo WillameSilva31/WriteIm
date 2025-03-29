@@ -69,7 +69,9 @@ function RegisterPage() {
                                 onChange={(e)=> setPassword(e.target.value)}
                             />
                         </FormGroup>
-                        <Button type="submit" onClick={()=> handleRegister(name,email,password)} >Entrar</Button>
+                        <Button type="submit" onClick={()=> handleRegister(name,email,password)} >
+                            <span className="button_top">Registrar</span>
+                        </Button>
                         <RegisterRedirect>Já possui uma conta?
                             <CustomLink to={"/"}> clique aqui</CustomLink>
                         </RegisterRedirect>

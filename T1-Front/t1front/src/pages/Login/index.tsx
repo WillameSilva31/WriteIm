@@ -47,7 +47,9 @@ function LoginPage() {
                 onChange={(e)=> setPassword(e.target.value)}
               />
             </FormGroup>
-            <Button type="submit" onClick={()=> handleLogin(email,password)}>Entrar</Button>
+            <Button type="submit" onClick={()=> handleLogin(email,password)}>
+              <span className="button_top">Entrar</span>
+            </Button>
             <RegisterRedirect>Não possui uma conta? 
               <CustomLink to={"/user"}> clique aqui</CustomLink>
             </RegisterRedirect>
