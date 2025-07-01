@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Buttons, Chat, Container, ContentContainer, DivButtonSendMessage, FormGroup, FormUpdate, Header, HeaderLeft, HeaderRight, ImgIcon, Input, Label, Messages, Name, NameUser, OthersUsers, SendImg, SendMessageInput, UpdateButton, WriteInput } from "./style";
+import { Buttons, Chat, Container, ContentContainer, DivButtonSendMessage, FormGroup, FormUpdate, Header, HeaderLeft, HeaderRight, HourMessageStyle, ImgIcon, Input, Label, MessageContent, Messages, MessageStyle, Name, NameMessageStyle, NameUser, OthersUsers, SendImg, SendMessageInput, UpdateButton, WriteInput } from "./style";
 import { userContext } from "../../context/UserContext";
 import Picon from "../../assets/PIcon.png";
 import SendIcon from "../../assets/SendIcon.png";
@@ -10,6 +10,10 @@ function ChatPage() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    if (!user) {
+        return <h1>Carregando...</h1>; 
+    }
 
     return (
         <Container>
@@ -83,7 +87,15 @@ function ChatPage() {
             <ContentContainer>
                 <OthersUsers></OthersUsers>
                 <Chat>
-                    <Messages></Messages>
+                    <Messages>
+                        <MessageStyle>
+                            <NameMessageStyle>{user.user.name}</NameMessageStyle>
+                            <MessageContent> oi </MessageContent>
+                            <HourMessageStyle> 
+                                <a> 10:00 </a>    
+                            </HourMessageStyle>
+                        </MessageStyle>
+                    </Messages>
                     <WriteInput>
                         <SendMessageInput placeholder="digite aqui..."></SendMessageInput>
                         <DivButtonSendMessage>

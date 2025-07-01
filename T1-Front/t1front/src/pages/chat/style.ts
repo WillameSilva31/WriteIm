@@ -237,3 +237,38 @@ export const SendImg = styled.img`
   width: 70px;
   height: 30px;
 `;
+
+export const MessageStyle = styled.div`
+  width: fit-content;       
+  height: auto;
+  display: flex;
+  margin: 10px;
+  padding: 12px;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  font-family: "Permanent Marker", serif;
+  border: 3px solid #45AFE9;
+`;
+
+export const NameMessageStyle = styled.div`
+ font-weight: 400;
+ display: flex;
+ align-items: flex-start; 
+ font-size: 20px;
+ color: #45AFE9;
+`;
+
+export const MessageContent =  styled.div`
+ padding-right:50px;
+`;
+
+export const HourMessageStyle = styled.div`
+ width: 100%;
+ font-size: 10px;
+ color: gray;
+ display: flex;
+ align-items: center;
+ justify-content: flex-end;
+`;
