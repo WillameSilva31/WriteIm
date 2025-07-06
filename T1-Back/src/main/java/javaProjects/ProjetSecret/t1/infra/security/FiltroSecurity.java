@@ -2,6 +2,7 @@ package javaProjects.ProjetSecret.t1.infra.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import javaProjects.ProjetSecret.t1.infra.security.TokenServico;
@@ -40,8 +41,13 @@ public class FiltroSecurity extends OncePerRequestFilter {
     }
 
     private String recuperarToken(HttpServletRequest request){
-        var authHeader = request.getHeader("Authorization");
-        if(authHeader == null) return null;
-        return authHeader.replace("Bearer ", "");
+        if (request.getCookies() != null){
+            for (Cookie cookie : request.getCookies()){
+                if ("jwt".equals(cookie.getName())){
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
 }

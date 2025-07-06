@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +25,6 @@ import java.util.UUID;
 public class UsersController {
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
-    private final TokenServico tokenServico;
 
 
     @PostMapping
@@ -37,18 +37,7 @@ public class UsersController {
             newUser.setEmail(body.email());
             this.usersRepository.save(newUser);
 
-            String token = this.tokenServico.geradorToken(newUser);
-            return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginRequestDTO body){
-        Users users = this.usersRepository.findByEmail(body.email()).orElseThrow(()-> new RuntimeException("Usuário não encontrado"));
-        if (passwordEncoder.matches( body.password(), users.getPassword())){
-            String token = this.tokenServico.geradorToken(users);
-            return ResponseEntity.ok(new ResponseDTO(users.getName(), token));
+            return ResponseEntity.ok(new UserDTO(newUser.getId().toString(),newUser.getName(), newUser.getEmail()));
         }
         return ResponseEntity.badRequest().build();
     }
